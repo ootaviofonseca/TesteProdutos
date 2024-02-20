@@ -6,7 +6,11 @@ import br.com.api.produtos.modelo.ProdutoModelo;
 import br.com.api.produtos.service.ProdutoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -17,6 +21,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class produtoController {
     @Autowired
     private ProdutoService ps;
+
+    @PostMapping("/cadastrar") //rota para cadastrar produtos
+    public ResponseEntity<?> cadastrar(@RequestBody ProdutoModelo pm){//Requestbody puxa o corpo da requisição
+        return ps.cadastrar(pm);
+    }
+
 
     @GetMapping("/listar")
     public Iterable<ProdutoModelo>listar(){
