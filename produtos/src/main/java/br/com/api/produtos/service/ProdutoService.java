@@ -24,19 +24,34 @@ public class ProdutoService {
         return pr.findAll();//retorna todos os produtos
     }
 
-    //Metodo de cadastrar produtos
-        public ResponseEntity <?> cadastrar(ProdutoModelo pm){
+    //Metodo de cadastrar ou alterar produtos
+    public ResponseEntity <?> cadastrarAlterar(ProdutoModelo pm,String acao){
 
-            if (pm.getNome().equals("")){
-                rm.setMensagem("Nome do produto não pode ser vazio");
-                return new ResponseEntity<RespostaModelo>(rm,HttpStatus.BAD_REQUEST);
-            }else if(pm.getMarca().equals("")){
-                rm.setMensagem("Marca do produto não pode ser vazia");
-                return new ResponseEntity<RespostaModelo>(rm,HttpStatus.BAD_REQUEST);
-            }else{
+        if (pm.getNome().equals("")){
+            rm.setMensagem("Nome do produto não pode ser vazio");
+            return new ResponseEntity<RespostaModelo>(rm,HttpStatus.BAD_REQUEST);
+        }else if(pm.getMarca().equals("")){
+            rm.setMensagem("Marca do produto não pode ser vazia");
+            return new ResponseEntity<RespostaModelo>(rm,HttpStatus.BAD_REQUEST);
+        }else{
+            if(acao.equals("cadastrar")){
                 return new ResponseEntity<ProdutoModelo>(pr.save(pm),HttpStatus.CREATED);
-
+            }else{
+                return new ResponseEntity<ProdutoModelo>(pr.save(pm),HttpStatus.OK); 
             }
         }
+    }
+
+    //Metodo para remover produtos
+    public ResponseEntity<RespostaModelo> remover(long id){
+        if(pr.existsById(id)){
+            pr.deleteById(id);
+            rm.setMensagem("Produto  removido com sucesso!");
+            return new ResponseEntity<RespostaModelo>(rm,HttpStatus.OK);
+        }else{
+            rm.setMensagem("Produto não encontrado");
+            return new ResponseEntity<RespostaModelo>(rm,HttpStatus.NOT_FOUND);
+        }
+    }
     
 } 
