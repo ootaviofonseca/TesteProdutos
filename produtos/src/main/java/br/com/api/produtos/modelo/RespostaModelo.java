@@ -10,5 +10,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RespostaModelo {
-    private String mensagem;
+    private String mensagem;//mensagem de erro
 }
