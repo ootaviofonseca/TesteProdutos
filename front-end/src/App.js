@@ -43,7 +43,13 @@ function App() {
     })
     .then(retorno => retorno.json()) // convertendo o retorno da requisição para JSON
     .then(retorno_convertido => { // tratando o retorno da requisição 
-      setProdutos([...produtos, retorno_convertido]);// atualizando o estado dos produtos
+      if(retorno_convertido.mensagem !== undefined){ //se tiver mensagem de erro
+        alert(retorno_convertido.mensagem); // exibindo a mensagem de erro
+      }else{
+        setProdutos([...produtos, retorno_convertido]);// atualizando o estado dos produtos
+        alert('Produto cadastrado com sucesso!'); // exibindo mensagem de sucesso
+      }
+      
     });
   }
 
