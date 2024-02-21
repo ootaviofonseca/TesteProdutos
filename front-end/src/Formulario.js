@@ -1,14 +1,15 @@
-function Formulario({botao}){ // recebendo o estado do botão do componente App.js
+function Formulario({botao,eventoTeclado,cadastrar}){ // recebendo o estado do botão do componente App.js
     return (
         <form>
-            
-            <input type="text" placeholder = "Nome" className="form-control"/>
-            <input type="text" placeholder = "Marca" className="form-control"/>
+            {//onChange é um evento que ocorre quando o valor do campo é alterado
+            }
+            <input type="text" onChange={eventoTeclado} name = 'nome' placeholder = "Nome" className="form-control"/>
+            <input type="text" onChange={eventoTeclado} name = 'marca' placeholder = "Marca" className="form-control"/>
 
             {
                 botao 
                 // se o estado for true, exibe o botão cadastrar
-                ? <input type = 'button' value = 'Cadastrar'  className="btn btn-primary" /> 
+                ? <input type = 'button' value = 'Cadastrar' onClick={cadastrar}  className="btn btn-primary" /> 
                 : // se o estado for false, exibe os botões alterar, remover e cancelar
                 <div>
                     <input type = 'button' value = 'Alterar'    className="btn btn-warning" />
