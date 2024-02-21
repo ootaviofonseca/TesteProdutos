@@ -48,16 +48,28 @@ function App() {
       }else{
         setProdutos([...produtos, retorno_convertido]);// atualizando o estado dos produtos
         alert('Produto cadastrado com sucesso!'); // exibindo mensagem de sucesso
+        limparFormulario(); // limpando o formulário
       }
       
     });
   }
 
+  //Selecionar Produto
+  const selecionarProduto = (indice) => { //o indice é o índice do vetor de produtos
+    setObjProduto(produtos[indice]); // pega as informações do produto selecionado e atualiza o estado do produto
+    setBtnCadastrar(false); // atualiza o estado do botão para false
+  }
+
+  //Limpar o formulário
+  const limparFormulario = () => {
+    setObjProduto(produto);// atualizando o estado do produto
+    setBtnCadastrar(true); // atualizando o estado do botão
+  }
   return (
     <div>
     {/*<p>{JSON.stringify(objProduto)}</p> teste para mostrar o objProduto*/}
-    <Formulario botao = {btnCadastrar} eventoTeclado= {aoDigitar} cadastrar = {cadastrar} /> {/* passando o estado para o componente Formulario */}
-    <Tabela vetor={produtos}/>
+    <Formulario botao = {btnCadastrar} eventoTeclado= {aoDigitar} cadastrar = {cadastrar} obj={objProduto} cancelar = {limparFormulario}/> {/* passando o estado para o componente Formulario */}
+    <Tabela vetor={produtos} selecionar = {selecionarProduto}/>
     </div>
   );
 }
