@@ -1,7 +1,7 @@
 function Tabela(){
     return (
-        <table>
-        <thead> 
+        <table className="table">
+        <thead > 
             <tr>
                 <th>#</th>
                 <th>Nome</th>
